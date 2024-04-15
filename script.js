@@ -26,11 +26,17 @@ document.addEventListener('DOMContentLoaded', function() {
         var nextJadwalPengambilan = new Date(startDate.getTime() + nextDaysToAdd * 24 * 60 * 60 * 1000);
         var nextJadwalFormatted = String(nextJadwalPengambilan.getDate()).padStart(2, '0') + '/' + String(nextJadwalPengambilan.getMonth() + 1).padStart(2, '0') + '/' + nextJadwalPengambilan.getFullYear();
         
-        // Jika bukan jadwal dari kedua grup, tampilkan pemberitahuan "Tidak ada jadwal"
-        if (today !== jadwalFormatted && today !== nextJadwalFormatted) {
-            document.getElementById('pemberitahuan').innerHTML = '<p>Tidak ada jadwal.</p>';
+         // Jika hari ini bukan tanggal pengambilan barang, tampilkan jadwal pengambilan selanjutnya
+         if (today !== jadwalFormatted && today !== nextJadwalFormatted) {
+            document.getElementById('jadwalPengambilan').innerHTML = '<p><b>Tidak ada jadwal</b></p>';
         } else {
-            document.getElementById('pemberitahuan').innerHTML = '<p>Jadwal selanjutnya untuk Grup ' + nextGroup + ': ' + nextJadwalFormatted + '</p>';
+            document.getElementById('jadwalPengambilan').innerHTML = '<p>Jadwal pengambilan barang: ' + jadwalFormatted + ' (Grup ' + group + ')</p>';
         }
+            // Jika hari ini bukan tanggal pengambilan barang, tampilkan jadwal pengambilan selanjutnya
+            if (today !== jadwalFormatted && today !== nextJadwalFormatted) {
+                document.getElementById('pemberitahuan').innerHTML = '<p>Jadwal selanjutnya untuk <b>Grup ' + nextGroup + ':</b> ' + nextJadwalFormatted + '</p>';
+            } else {
+                document.getElementById('pemberitahuan').innerHTML = '<p>Jadwal pengambilan barang: ' + jadwalFormatted + ' (Grup ' + group + ')</p>';
+            }
     }
 });
